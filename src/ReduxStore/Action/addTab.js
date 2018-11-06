@@ -1,0 +1,8 @@
+import {ADD_NAME} from './actionVariables'
+
+export const addName = (name) =>{
+    return {
+        type: ADD_NAME,
+        name:name
+    }
+}
