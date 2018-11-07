@@ -4,14 +4,47 @@ import {createAccount} from '../../../ReduxStore/Action/accountLogin'
 import {connect} from 'react-redux'
 class SignInView extends Component{
     state={
-        userName:'',
-        password:''
+        accountCreate:{
+            userName:{
+                value: '',
+                rules:{
+                    minLength:6
+                }
+            }
+        },
+        password:'',
+        confirmpass:''
     }
     
     onUpdateText = (key, val) =>{
-        this.setState({
-            [key]:val
+        // let newAccount = this.state.accountCreate
+        // newAccount = {
+        //     ...newAccount,
+        //     ...newAccount[key]={
+        //         value: val
+        //     }
+
+        // }
+        this.setState(prevState =>{
+            return{
+                accountCreate:{
+                ...prevState.accountCreate,
+                [key]:{
+                    ...prevState.accountCreate[key],
+                    value:val
+                }
+                    
+                }
+            }
+            
         })
+        // this.setState({
+        //     accountCreate:{
+        //         userName:{
+        //             value:val
+        //         }
+        //     }
+        // })
     }
 
     onCreateAccount = () =>{    
@@ -31,9 +64,27 @@ class SignInView extends Component{
                 value={this.state.password} 
                 onChangeText={val => this.onUpdateText('password', val)}/>
 
+                <TextInput placeholder='Confirm Password' 
+                value={this.state.confirmpass} 
+                onChangeText={val => this.onUpdateText('confirmpass', val)}/>
+
                 <Button title='Create Account' onPress={this.onCreateAccount}/>
             </View>
         )
+    }
+    componentDidMount(){
+        console.log("Component Did Mount")
+    }
+    shouldComponentUpdate(){
+        console.log("Should Component Update")
+        return true;
+    }
+    componentDidUpdate(prevProps, prevState,snapshot){
+        
+        console.log("Component did Update")
+    }
+    componentWillUnmount(){
+        console.log("Component will Unmount")
     }
 
 }

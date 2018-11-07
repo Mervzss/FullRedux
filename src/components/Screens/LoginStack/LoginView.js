@@ -23,12 +23,13 @@ class LoginView extends Component{
     }
 
     onLogin = () =>{
-        this.onvalid()
-        this.props.validity ? this.props.navigation.navigate('MainTab') : alert('Wrong Password')
+        this.props.validity ? this.props.navigation.navigate('MainTab') : alert('Wrong Password') 
+        this.setState({
+            username:'',
+            password:''
+        }) 
     }
-    onvalid = () =>{
-        this.props.accountData(this.state.username,this.state.password)
-    }
+
 
     render(){
         return(
@@ -53,6 +54,22 @@ class LoginView extends Component{
             </View>
         )
     }
+
+    componentDidMount(){
+        console.log("Component Did Mount")
+    }
+    shouldComponentUpdate(){
+        console.log("Should Component Update")
+        return true;
+    }
+    componentDidUpdate(prevProps, prevState,snapshot){
+        prevProps.accountData(this.state.username,this.state.password)
+        console.log("Component did Update")
+    }
+    componentWillUnmount(){
+        console.log("Component will Unmount")
+    }
+
 }
 
 const styles = StyleSheet.create({
